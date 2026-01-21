@@ -6,7 +6,7 @@ function parseFile(filePath) {
   // Detect file extension (.csv or .json) and parse accordingly.
   // Return an array of sale objects.
 
-  throw new Error('parseFile not implemented');
+  console.log('Parsing file: ' + filePath);
 }
 
 module.exports = { parseFile };
