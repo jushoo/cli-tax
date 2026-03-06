@@ -43,12 +43,24 @@ describe("currencyConverter.js", () => {
     expect(result).toEqual(salesRow.price * 0.75);
   });
 
-  it("Should throw an error if Currency doesnt exist", () => {
+  it("should throw an error if Currency doesnt exist", () => {
     const salesRow = {
       date: "2024-02-01",
       sku: "KEYCAP-SET",
       price: 45.0,
       currency: null,
+      type: "merchandise",
+    };
+
+    expect(() => convertToUSD(salesRow)).toThrow("Invalid row");
+  });
+
+  it("should trhow an error if price doesnt exist", () => {
+    const salesRow = {
+      date: "2024-02-01",
+      sku: "KEYCAP-SET",
+      price: null,
+      currency: "CAD",
       type: "merchandise",
     };
 
