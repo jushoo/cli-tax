@@ -32,9 +32,9 @@ async function main() {
     table.push(["", subHeader("Amount"), subHeader("Currency")]);
     table.push(
       { "Total Items": [summary.totalItems, ""] },
-      { "Total Revenue (USD)": [`$${summary.totalRevenue.toFixed(2)}`, "USD"] },
+      { "Total Revenue": [`$${summary.totalRevenue.toFixed(2)}`, "USD"] },
       {
-        "Total Tax (USD)": [`$${summary.totalTax.toFixed(2)}`, "USD"],
+        "Total Tax": [`$${summary.totalTax.toFixed(2)}`, "USD"],
       },
     );
 

@@ -1,5 +1,5 @@
-const { calculateTax } = require("../src/lib/taxCalculator.js");
-const { convertToUSD } = require("../src/lib/currencyConverter.js");
+const { calculateTax } = require("../src/lib/taxCalculator.cjs");
+const { convertToUSD } = require("../src/lib/currencyConverter.cjs");
 
 describe("currencyConverter.js", () => {
   it("should compute tax for merchandise with rate of 15%", () => {

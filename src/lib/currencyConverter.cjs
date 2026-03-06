@@ -5,6 +5,9 @@ const CONVERSION_MAP = {
 };
 
 function convertToUSD(salesRow) {
+  if (!salesRow.currency) {
+    throw new Error(`Invalid row: ${JSON.stringify(salesRow)}`);
+  }
   return salesRow.price * CONVERSION_MAP[salesRow.currency];
 }
 

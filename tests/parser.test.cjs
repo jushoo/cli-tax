@@ -31,6 +31,4 @@ describe("parser.js", () => {
 
     expect(Array.isArray(result)).toBeTruthy();
   });
-
-  it("should throw an error when csv is malformed", async () => { });
 });
