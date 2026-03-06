@@ -1,5 +1,5 @@
-const { convertToUSD } = require("./lib/currencyConverter.js");
-const { calculateTax } = require("./lib/taxCalculator.js");
+const { convertToUSD } = require("./lib/currencyConverter.cjs");
+const { calculateTax } = require("./lib/taxCalculator.cjs");
 
 function processSales(salesData) {
   for (const row of salesData) {

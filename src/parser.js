@@ -1,7 +1,7 @@
 const { readFile } = require("fs/promises");
 const fs = require("fs");
 const path = require("path");
-const { parseCsv } = require("./lib/csvParser");
+const { parseCsv } = require("./lib/csvParser.cjs");
 
 const validExtensions = [".csv", ".json"];
 

@@ -20,15 +20,24 @@ async function main() {
     const summary = processSales(salesData);
 
     // 3. Output Results
+    const header = chalk.bold.blue;
+    const subHeader = chalk.bold.yellow;
     const table = new Table({
-      head: ["Total Items", "Total Revenue (USD)", "Total Tax (USD)"],
-      colWidths: [20, 20, 20],
+      style: { "padding-left": 0, "padding-right": 0, head: [], border: [] },
+      colWidths: [20, 25, 25],
     });
     table.push([
-      summary.totalItems,
-      `$${summary.totalRevenue.toFixed(2)}`,
-      `$${summary.totalTax.toFixed(2)}`,
+      { colSpan: 3, content: header("Order Summary"), hAlign: "center" },
     ]);
+    table.push(["", subHeader("Amount"), subHeader("Currency")]);
+    table.push(
+      { "Total Items": [summary.totalItems, ""] },
+      { "Total Revenue (USD)": [`$${summary.totalRevenue.toFixed(2)}`, "USD"] },
+      {
+        "Total Tax (USD)": [`$${summary.totalTax.toFixed(2)}`, "USD"],
+      },
+    );
+
     console.log(table.toString());
   } catch (err) {
     console.error("Error:", err.message);
