@@ -65,4 +65,27 @@ describe("currencyConverter.js", () => {
 
     expect(tax).toEqual(result * 0.1);
   });
+
+  it("should thow an error when type is missing", () => {
+    const salesRow = {
+      date: "2024-02-03",
+      sku: "POSTER-ART",
+      price: 15,
+      currency: "CAD",
+    };
+
+    expect(() => calculateTax(salesRow)).toThrow("Invalid row");
+  });
+
+  it("should throw an error when priceToUSD is missing", () => {
+    const salesRow = {
+      date: "2024-02-03",
+      sku: "POSTER-ART",
+      price: 15,
+      currency: "CAD",
+      type: "digital",
+    };
+
+    expect(() => calculateTax(salesRow)).toThrow("Invalid row");
+  });
 });

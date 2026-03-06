@@ -6,6 +6,10 @@ const TAX_MAP = {
 };
 
 function calculateTax(salesRow) {
+  if (!salesRow.type || !salesRow.priceToUSD) {
+    throw new Error(`Invalid row: ${JSON.stringify(salesRow)}`);
+  }
+
   return salesRow.priceToUSD * (TAX_MAP[salesRow.type] ?? TAX_MAP.default);
 }
 
