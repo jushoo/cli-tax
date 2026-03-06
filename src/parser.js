@@ -1,4 +1,5 @@
 const { readFile } = require("fs/promises");
+const fs = require("fs");
 const path = require("path");
 const { parseCsv } = require("./lib/csvParser");
 
@@ -15,6 +16,11 @@ async function parseFile(filePath) {
 
   try {
     const fullPath = path.join(process.cwd(), filePath);
+
+    if (!fs.existsSync(fullPath)) {
+      console.error(`File: ${filePath} does not exist`);
+      return;
+    }
     const data = await readFile(fullPath, "utf8");
 
     if (extension === ".json") {

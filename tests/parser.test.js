@@ -1,6 +1,15 @@
 const { parseFile } = require("../src/parser.js");
 
 describe("parser.js", () => {
+  it("should call console.error when file doesnt exist", async () => {
+    const errorSpy = jest.spyOn(console, "error").mockImplementation(() => { });
+    const path = "~/.something/this-doesnt-exist.json";
+
+    await parseFile(path);
+
+    expect(errorSpy).toHaveBeenCalledWith(`File: ${path} does not exist`);
+  });
+
   it("should throw an error when invalid file is given", async () => {
     const path = "./test.pdf";
 
