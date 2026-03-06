@@ -8,29 +8,29 @@ const validExtensions = [".csv", ".json"];
 async function parseFile(filePath) {
   console.log("Parsing file: " + filePath);
 
-  const extension = path.extname(filePath);
+  const normalizedPath = path.isAbsolute(filePath)
+    ? filePath
+    : path.resolve(process.cwd(), filePath);
+  const extension = path.extname(normalizedPath).toLowerCase();
 
   if (!validExtensions.includes(extension)) {
     throw new Error("Invalid file, only .csv and .json are supported");
   }
 
   try {
-    const fullPath = path.join(process.cwd(), filePath);
-
-    if (!fs.existsSync(fullPath)) {
+    if (!fs.existsSync(normalizedPath)) {
       console.error(`File: ${filePath} does not exist`);
       return;
     }
-    const data = await readFile(fullPath, "utf8");
+
+    const data = await readFile(normalizedPath, "utf8");
 
     if (extension === ".json") {
-      const jsonData = JSON.parse(data);
-      return jsonData;
+      return JSON.parse(data);
     }
 
     if (extension === ".csv") {
-      const csvData = parseCsv(data);
-      return csvData;
+      return parseCsv(data);
     }
 
     return null;
