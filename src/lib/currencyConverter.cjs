@@ -11,4 +11,4 @@ function convertToUSD(salesRow) {
   return salesRow.price * CONVERSION_MAP[salesRow.currency];
 }
 
-module.exports = { convertToUSD };
+module.exports = { convertToUSD, CONVERSION_MAP };

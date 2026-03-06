@@ -1,4 +1,7 @@
-const { convertToUSD } = require("../src/lib/currencyConverter.cjs");
+const {
+  convertToUSD,
+  CONVERSION_MAP,
+} = require("../src/lib/currencyConverter.cjs");
 
 describe("currencyConverter.js", () => {
   it("should convert USD to USD with a rate of 1.00", () => {
@@ -26,7 +29,7 @@ describe("currencyConverter.js", () => {
 
     const result = convertToUSD(salesRow);
 
-    expect(result).toEqual(salesRow.price * 1.1);
+    expect(result).toEqual(salesRow.price * CONVERSION_MAP.EUR);
   });
 
   it("should convert CAD to USD with a rate of 0.75", () => {
@@ -40,7 +43,22 @@ describe("currencyConverter.js", () => {
 
     const result = convertToUSD(salesRow);
 
-    expect(result).toEqual(salesRow.price * 0.75);
+    expect(result).toEqual(salesRow.price * CONVERSION_MAP.CAD);
+  });
+
+  it("should still try to convert USD to USD", () => {
+    // LOL
+    const salesRow = {
+      date: "2024-02-03",
+      sku: "POSTER-ART",
+      price: 15,
+      currency: "USD",
+      type: "merchandise",
+    };
+
+    const result = convertToUSD(salesRow);
+
+    expect(result).toEqual(salesRow.price * CONVERSION_MAP.USD);
   });
 
   it("should throw an error if Currency doesnt exist", () => {
